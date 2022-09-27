@@ -6,6 +6,7 @@ pragma solidity ^0.8.6;
 To be able to run this smart contract successfully, you need to approve the smart contract address and an amount in the
 USDC smart contract with a pre-approved amunt (expressed by the amount in USDC followed by six decimal places
  ex. 1 USDC = 1000000)
+Testing
  */
 
 interface USDC {
