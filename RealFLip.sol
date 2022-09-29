@@ -7,6 +7,7 @@ To be able to run this smart contract successfully, you need to approve the smar
 USDC smart contract with a pre-approved amunt (expressed by the amount in USDC followed by six decimal places
  ex. 1 USDC = 1000000)
  */
+
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
@@ -59,6 +60,10 @@ contract RealFlipBalance {
         stakingBalance[msg.sender] = balance - withdrawalBalance * 10 ** 6;
     }
 }
+
+/************ 
+ NFT CONTRACT
+*************/
 
 contract RealFLipNFTs is ERC1155, Ownable {
     uint256 public constant Genesis = 0;
