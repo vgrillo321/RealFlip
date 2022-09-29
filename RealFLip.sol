@@ -6,7 +6,6 @@ pragma solidity ^0.8.6;
 To be able to run this smart contract successfully, you need to approve the smart contract address and an amount in the
 USDC smart contract with a pre-approved amunt (expressed by the amount in USDC followed by six decimal places
  ex. 1 USDC = 1000000)
-Testing
  */
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -62,10 +61,13 @@ contract RealFlipBalance {
 }
 
 contract RealFLipNFTs is ERC1155, Ownable {
-    uint256 tokensInCirculation;
-
+    uint256 public constant flipClubBeta = 0;
+    uint256 public constant flipClubSigma = 0;
+    uint256 public constant flipClubAlpha = 0;
     constructor() ERC1155("") {
-        tokensInCirculation = 0;
+        _mint(msg.sender, flipClubBeta, 10**3, "");
+        _mint(msg.sender, flipClubSigma, 10**2, "");
+        _mint(msg.sender, flipClubAlpha, 10, "");
     }
 
     function mintNFT(uint256 amount) public onlyOwner {
