@@ -8,6 +8,8 @@ USDC smart contract with a pre-approved amunt (expressed by the amount in USDC f
  ex. 1 USDC = 1000000)
 Testing
  */
+import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
 interface USDC {
 
