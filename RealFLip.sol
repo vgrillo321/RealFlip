@@ -76,6 +76,7 @@ contract RealFLipNFTs is ERC1155, Ownable {
     TODO: This function would be used to mint the NFT, 
     other way to do it is by transfering ownership of the NFT tokens 
     */
+    
     // function mintNFT(uint256 amount) public onlyOwner {
     //     for(uint256 i = 0; i < amount; i++) {
     //         // Loop to increment amount of tokens in circulation everytime it is minted
