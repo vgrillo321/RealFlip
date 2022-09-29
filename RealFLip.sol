@@ -60,3 +60,19 @@ contract RealFlipBalance {
         stakingBalance[msg.sender] = balance - withdrawalBalance * 10 ** 6;
     }
 }
+
+contract RealFLipNFTs is ERC1155, Ownable {
+    uint256 tokensInCirculation;
+
+    constructor() ERC1155("") {
+        tokensInCirculation = 0;
+    }
+
+    function mintNFT(uint256 amount) public onlyOwner {
+        for(uint256 i = 0; i < amount; i++) {
+            // Loop to increment amount of tokens in circulation everytime it is minted
+            _mint(msg.sender, tokensInCirculation, 1, "");
+            tokensInCirculation++;
+        }
+    }
+}
