@@ -61,15 +61,15 @@ contract RealFlipBalance {
 }
 
 contract RealFLipNFTs is ERC1155, Ownable {
-    uint256 public constant flipClubBeta = 0;
-    uint256 public constant flipClubSigma = 0;
-    uint256 public constant flipClubAlpha = 0;
+    uint256 public constant Genesis = 0;
+    uint256 public constant Hodl = 0;
+    uint256 public constant Whale = 0;
     
     // TODO: Should we mint on a constructor? Or mint by directly calling a minting function? 
     constructor() ERC1155("") {
-        _mint(msg.sender, flipClubBeta, 10**3, "");
-        _mint(msg.sender, flipClubSigma, 10**2, "");
-        _mint(msg.sender, flipClubAlpha, 10, "");
+        _mint(msg.sender, Genesis, 10**3, "");
+        _mint(msg.sender, Hodl, 10**2, "");
+        _mint(msg.sender, Whale, 10, "");
     }
 
     /*
