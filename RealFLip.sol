@@ -62,8 +62,8 @@ contract RealFlipBalance {
 
 contract RealFLipNFTs is ERC1155, Ownable {
     uint256 public constant Genesis = 0;
-    uint256 public constant Hodl = 0;
-    uint256 public constant Whale = 0;
+    uint256 public constant Hodl = 1;
+    uint256 public constant Whale = 2;
     
     // TODO: Should we mint on a constructor? Or mint by directly calling a minting function? 
     constructor() ERC1155("") {
@@ -76,7 +76,7 @@ contract RealFLipNFTs is ERC1155, Ownable {
     TODO: This function would be used to mint the NFT, 
     other way to do it is by transfering ownership of the NFT tokens 
     */
-    
+
     // function mintNFT(uint256 amount) public onlyOwner {
     //     for(uint256 i = 0; i < amount; i++) {
     //         // Loop to increment amount of tokens in circulation everytime it is minted
