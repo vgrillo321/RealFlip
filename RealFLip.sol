@@ -1,12 +1,19 @@
 // SPDX-License-Identifier: MIT
 
+/*
+    /$$$$$$$                      /$$       /$$$$$$$$ /$$ /$$                  /$$$$$$  /$$           /$$      
+    | $$__  $$                    | $$      | $$_____/| $$|__/                 /$$__  $$| $$          | $$      
+    | $$  \ $$  /$$$$$$   /$$$$$$ | $$      | $$      | $$ /$$  /$$$$$$       | $$  \__/| $$ /$$   /$$| $$$$$$$ 
+    | $$$$$$$/ /$$__  $$ |____  $$| $$      | $$$$$   | $$| $$ /$$__  $$      | $$      | $$| $$  | $$| $$__  $$
+    | $$__  $$| $$$$$$$$  /$$$$$$$| $$      | $$__/   | $$| $$| $$  \ $$      | $$      | $$| $$  | $$| $$  \ $$
+    | $$  \ $$| $$_____/ /$$__  $$| $$      | $$      | $$| $$| $$  | $$      | $$    $$| $$| $$  | $$| $$  | $$
+    | $$  | $$|  $$$$$$$|  $$$$$$$| $$      | $$      | $$| $$| $$$$$$$/      |  $$$$$$/| $$|  $$$$$$/| $$$$$$$/
+    |__/  |__/ \_______/ \_______/|__/      |__/      |__/|__/| $$____/        \______/ |__/ \______/ |_______/ 
+                                                            | $$                                              
+                                                            | $$                                              
+                                                            |__/                                              
+*/
 pragma solidity ^0.8.6;
-
-/* 
-To be able to run this smart contract successfully, you need to approve the smart contract address and an amount in the
-USDC smart contract with a pre-approved amunt (expressed by the amount in USDC followed by six decimal places
- ex. 1 USDC = 1000000)
- */
 
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -22,6 +29,13 @@ interface USDC {
 }
 
 contract RealFlipBalance {
+
+/* 
+To be able to run this smart contract successfully, you need to approve the smart contract address and an amount in the
+USDC smart contract with a pre-approved amunt (expressed by the amount in USDC followed by six decimal places
+ ex. 1 USDC = 1000000)
+ */
+ 
     USDC public USDc;
     address owner;
     mapping(address => uint) public stakingBalance;
@@ -76,7 +90,7 @@ contract RealFLipNFTs is ERC1155, Ownable {
         _mint(msg.sender, Hodl, 10**2, "");
         _mint(msg.sender, Whale, 10, "");
     }
-
+    
     /*
     TODO: This function would be used to mint the NFT, 
     other way to do it is by transfering ownership of the NFT tokens 
