@@ -1,7 +1,19 @@
 {
-    "description":"",
-    "external_url":"",
-    "image":"",
-    "name":"",
-    "attributes":[]
+    "name": "VIPMint 1155 TestNet NFT #1",
+    "description": "This collection serves as VIPMint's TestNet for ERC 1155",
+    "image": "ipfs://QmQ61Yz8esXS1hBupRmxKawcwTfFAC3G1ZpVUSFPdbuT9B/1.png",
+    "dna": "373143817f85a96000a30ea74fe459057d74bdd2",
+    "edition": 1,
+    "date": 1656876849175,
+    "attributes": [
+      {
+        "trait_type": "Background",
+        "value": "1155_0001_Background"
+      },
+      {
+        "trait_type": "Content",
+        "value": "1155_0000_VIP_MINT_ERC_1155_TEST_NFT"
+      }
+    ],
+    "minter_DApp": "VIPMint Minting DApp at www.vipminter.xyz"
 }
