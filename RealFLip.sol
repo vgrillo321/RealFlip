@@ -31,7 +31,7 @@ interface USDC {
 USDC Staking Contract
 *********************/
 
-contract RealFlipBalance {
+contract RealFlipBalance is Ownable {
 
 /* 
 To be able to run this smart contract successfully, you need to approve the smart contract address and an amount in the
@@ -40,12 +40,12 @@ USDC smart contract with a pre-approved amunt (expressed by the amount in USDC f
  */
 
     USDC public USDc;
-    address owner;
+    address _owner;
     mapping(address => uint) public stakingBalance;
 
     constructor() {
         USDc = USDC(0x07865c6E87B9F70255377e024ace6630C1Eaa37F);
-        owner = msg.sender;
+        _owner = owner();
     }
     function depositTokens(uint $USDC) public {
 
@@ -60,7 +60,7 @@ USDC smart contract with a pre-approved amunt (expressed by the amount in USDC f
     }
 
     // Unstaking Tokens (Withdraw)
-    function withdrawalTokens(uint _amount) public {
+    function withdrawalTokens(uint _amount) public onlyOwner{
         //Set balance and withdrawal value
         uint balance = stakingBalance[msg.sender];
         uint withdrawalBalance = _amount;
@@ -82,28 +82,35 @@ USDC smart contract with a pre-approved amunt (expressed by the amount in USDC f
  NFT CONTRACT
 *************/
 
-contract RealFLipNFTs is ERC1155, Ownable {
-    uint256 public constant Genesis = 0;
-    uint256 public constant Hodl = 1;
-    uint256 public constant Whale = 2;
+contract RealFLipNFTs is ERC1155, Ownable, RealFlipBalance {
+    uint256 public Genesis;
+    uint256 public Hodl;
+    uint256 public Whale;
     
     // TODO: Should we mint on a constructor? Or mint by directly calling a minting function? 
     constructor() ERC1155("") {
-        _mint(msg.sender, Genesis, 10**3, "");
-        _mint(msg.sender, Hodl, 10**2, "");
-        _mint(msg.sender, Whale, 10, "");
+        // _mint(msg.sender, Genesis, 10**3, "");
+        // _mint(msg.sender, Hodl, 10**2, "");
+        // _mint(msg.sender, Whale, 10, "");
+        Genesis = 0;
+        Hodl =  1;
+        Whale = 2;
     }
-    
-    /*
-    TODO: This function would be used to mint the NFT, 
-    other way to do it is by transfering ownership of the NFT tokens 
-    */
 
-    // function mintNFT(uint256 amount) public onlyOwner {
-    //     for(uint256 i = 0; i < amount; i++) {
-    //         // Loop to increment amount of tokens in circulation everytime it is minted
-    //         _mint(msg.sender, tokensInCirculation, 1, "");
-    //         tokensInCirculation++;
-    //     }
-    // }
+    function mintGenesisNFT(uint256 amount) public onlyOwner {
+        
+        uint genesisCost = 10**6;
+        
+        // Verify is user has enough amount of tokens
+        require(stakingBalance[msg.sender] > genesisCost * amount, "Not enough balance to make transaction");
+        
+        for(uint256 i = 0; i < amount; i++) {
+            // Loop to increment amount of tokens in circulation everytime it is minted
+            _mint(msg.sender, Genesis, 1, "");
+            Genesis++;
+        }
+
+        // Reduce amount of staking balance USDC by the amount of NFTs bought
+        stakingBalance[msg.sender] = stakingBalance[msg.sender] - (genesisCost * amount) * 10 ** 6; 
+    }
 }
