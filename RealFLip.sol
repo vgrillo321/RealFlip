@@ -15,6 +15,7 @@ pragma solidity ^0.8.6;
 
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "./UniswapTokenSwap";
 
 interface USDC {
 
@@ -47,6 +48,11 @@ USDC smart contract with a pre-approved amunt (expressed by the amount in USDC f
         USDc = USDC(0x07865c6E87B9F70255377e024ace6630C1Eaa37F);
         _owner = owner();
     }
+
+    function isOwner() internal view returns(bool) {
+        return owner() == msg.sender;
+    }
+
     function depositTokens(uint $USDC) public {
 
         // amount should be > 0
@@ -76,6 +82,12 @@ USDC smart contract with a pre-approved amunt (expressed by the amount in USDC f
         // Reduce staking balance
         stakingBalance[msg.sender] = balance - withdrawalBalance * 10 ** 6;
     }
+
+
+    function swapETHtoUSDC (uint _inamount, uint _outamount) public onlyOwner {
+        tokenSwap.swap(IERC20, USDc, _inamount, _outamount);
+    }
+
 }
 
 /************ 
@@ -101,7 +113,7 @@ contract RealFLipNFTs is ERC1155, Ownable, RealFlipBalance {
         
         uint genesisCost = 10**6;
         
-        // Verify is user has enough amount of tokens
+        // Verify if user has enough amount of tokens
         require(stakingBalance[msg.sender] > genesisCost * amount, "Not enough balance to make transaction");
         
         for(uint256 i = 0; i < amount; i++) {
