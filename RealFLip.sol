@@ -83,10 +83,11 @@ USDC smart contract with a pre-approved amunt (expressed by the amount in USDC f
         stakingBalance[msg.sender] = balance - withdrawalBalance * 10 ** 6;
     }
 
-
-    function swapETHtoUSDC (uint _inamount, uint _outamount) public onlyOwner {
-        tokenSwap.swap(IERC20, USDc, _inamount, _outamount);
-    }
+    // TODO: Trying to build a swap function for users to swap ETH to USDC 
+    
+    // function swapETHtoUSDC (uint _inamount, uint _outamount) public onlyOwner {
+    //     tokenSwap.swap(IERC20, USDc, _inamount, _outamount);
+    // }
 
 }
 
@@ -111,10 +112,8 @@ contract RealFLipNFTs is ERC1155, Ownable, RealFlipBalance {
 
     function mintGenesisNFT(uint256 amount) public onlyOwner {
         
-        uint genesisCost = 10**6;
-        
-        // Verify if user has enough amount of tokens
-        require(stakingBalance[msg.sender] > genesisCost * amount, "Not enough balance to make transaction");
+        // Verify is user has enough amount of tokens
+        require(stakingBalance[msg.sender] > 10000000 * amount, "Not enough balance to make transaction");
         
         for(uint256 i = 0; i < amount; i++) {
             // Loop to increment amount of tokens in circulation everytime it is minted
@@ -123,6 +122,7 @@ contract RealFLipNFTs is ERC1155, Ownable, RealFlipBalance {
         }
 
         // Reduce amount of staking balance USDC by the amount of NFTs bought
-        stakingBalance[msg.sender] = stakingBalance[msg.sender] - (genesisCost * amount) * 10 ** 6; 
+        stakingBalance[msg.sender] = stakingBalance[msg.sender] -(amount * 10000000); 
     }
 }
+
