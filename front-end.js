@@ -25,8 +25,8 @@ if (window.ethereum) {
   // Create a new contract object
   const contract = new web3.eth.Contract(abi, contractAddress);
   
-  // Deposit Tokens
-  async function depositTokens(amount) {
+// Deposit Tokens
+async function depositTokens(amount) {
     // Check the amount is greater than 0
     if (amount <= 0) {
       alert("You need to deposit USDC");
@@ -36,11 +36,15 @@ if (window.ethereum) {
     const account = await web3.eth.getAccounts();
     // Deposit the tokens
     contract.methods.depositTokens(amount).send({ from: account[0] })
-      .then(() => {
-        alert("Deposit Successful!");
+      .then((result) => {
+        if (result.status === true) {
+          alert("Deposit Successful!");
+        } else {
+          alert("Transaction failed");
+        }
       })
       .catch((error) => {
-        console.error(error);
+        alert(error.message);
       });
   }
   
@@ -50,11 +54,16 @@ if (window.ethereum) {
     const account = await web3.eth.getAccounts();
     // Withdraw the tokens
     contract.methods.withdrawalTokens(amount).send({ from: account[0] })
-      .then(() => {
-        alert("Withdrawal Successful!");
+      .then((result) => {
+        if (result.status === true) {
+          alert("Withdrawal Successful!");
+        } else {
+          alert("Transaction failed");
+        }
       })
       .catch((error) => {
-        console.error(error);
+        alert(error.message);
       });
   }
+  
   
